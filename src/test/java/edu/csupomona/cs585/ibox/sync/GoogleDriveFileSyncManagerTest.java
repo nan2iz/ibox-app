@@ -33,12 +33,14 @@ public class GoogleDriveFileSyncManagerTest {
 	
 	private final String testID = "ID:TEST0001";
 	private final String fileName = "dummyFile.txt";
+	private final String testGoogleID = "id1";
 	
 	@Rule
 	public TemporaryFolder tempFolder = new TemporaryFolder();
 	
 	@Before
 	public void setup() throws IOException{
+		
 		mockService = mock(Drive.class);
 		mockGoogleDrv = new GoogleDriveFileSyncManager(mockService);
 		dummyLocalFile = tempFolder.newFile(fileName);
@@ -48,8 +50,7 @@ public class GoogleDriveFileSyncManagerTest {
 		mockRequestList = mock(List.class);
 		
 		ArrayList<File> googleFile = new ArrayList<File>();
-		googleFile.add((new File()).setTitle(dummyLocalFile.getName()));
-		
+		googleFile.add((new File()).setTitle(dummyLocalFile.getName()).setId(testGoogleID));
 		googleFileList = new FileList();
 		googleFileList.setItems(googleFile);
 		
@@ -63,6 +64,7 @@ public class GoogleDriveFileSyncManagerTest {
 	
 	@Test
 	public void testAddFile() throws IOException{
+		
 		writeLog("Perform AddFile Test");
 
 		Files.Insert mockInsert = mock(Files.Insert.class);
@@ -80,6 +82,7 @@ public class GoogleDriveFileSyncManagerTest {
 	
 	@Test
 	public void testUpdateFile() throws IOException{
+		
 		writeLog("Perform UpdateFile Test");
 		
 		Files.Update mockUpdate = mock(Files.Update.class);
@@ -97,6 +100,7 @@ public class GoogleDriveFileSyncManagerTest {
 	
 	@Test
 	public void testDeleteFile() throws IOException{
+		
 		writeLog("Perform DeleteFile Test");
 
 		Files.Delete delete = mock(Files.Delete.class);
@@ -114,20 +118,24 @@ public class GoogleDriveFileSyncManagerTest {
 	
 	@Test
 	public void testGetFileID() throws IOException{
+		
 		writeLog("Perform FileID Test");
 
 	}
 	
 	
 	public void getFileId() throws IOException{
+		
 		when(mockService.files()).thenReturn(mockFiles);
 		when(mockFiles.list()).thenReturn(mockRequestList);
 		when(mockRequestList.execute()).thenReturn(googleFileList);
+		
 	}
 	
 	private void writeLog(String msg){
+		
 		String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
-		System.out.println(timeStamp + " --> " +msg);
+		System.out.println(timeStamp + " --> " + msg);
 		
 	}
 
