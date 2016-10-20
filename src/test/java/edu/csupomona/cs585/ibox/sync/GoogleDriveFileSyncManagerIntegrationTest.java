@@ -29,7 +29,8 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 	private static java.io.File dummyFile;
 	
 	
-	private final static String testPath = "C:/Nanwarin";
+	//private final static String testPath = "C:/Nanwarin"; //For PC
+	private final static String testPath = "/Users/nanwarinchantarutai/Documents/TestFolder"; //for Mac
 	private final static String testFile = "test.txt";
 
 	
@@ -42,21 +43,22 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 
 	}
 	
-	//@AfterClass
+	@AfterClass
 	public static void lastCleanup(){
 		
-			try {
-				googleDrv.deleteFile(localFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-				writeLog("Failed to delete file from googleDrive: " + e);
-			}
-			
+		try {
+			if(isFileExistOnGoogle(testFile))
+					googleDrv.deleteFile(localFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+			writeLog("Failed to clean up");
+		}
 			
 	}
 	
 	@Before
 	public void setup() throws IOException{
+		
 		localFile = new java.io.File(testPath, testFile);
 		createFileLocalFile();
 	}
@@ -97,9 +99,6 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 		
 		googleDrv.deleteFile(localFile);
 		
-		Thread.sleep(2000); // Put deley to make sure googledrive is updated.
-		
-		System.out.println(">>>" +isFileExistOnGoogle(localFile.getName()) ); // Need to fix
 		assertFalse(isFileExistOnGoogle(localFile.getName()));
 		
 	}
@@ -110,7 +109,12 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 		FileList googleFileList = request.execute();
 		for(File file: googleFileList.getItems()){
 			if(file.getTitle().equals(fileName))
-				return true;
+				{
+					System.out.print("File tile: " + file.getTitle());
+					System.out.print(" File name: " + fileName);
+					System.out.print(" File ID" + file.getId());
+					return true;
+				}
 		}
 		
 		return false;
