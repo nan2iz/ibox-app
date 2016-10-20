@@ -54,9 +54,7 @@ public class GoogleDriveServiceProvider {
 		.setApprovalPrompt("auto").build();
 
 		String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
-		//System.out.println("Please open the following URL in your browser then type the authorization code:");
-		//System.out.println("  " + url);
-		
+
 		System.out.println("Please input authorization: ");
 		if(Desktop.isDesktopSupported()){
 			try {
@@ -64,6 +62,11 @@ public class GoogleDriveServiceProvider {
 			} catch (URISyntaxException e) {
 				System.out.println("Could not open the url inside browser, please manual copy URL and open in any browser");
 			}
+		}
+		else
+		{
+			System.out.println("Please open the following URL in your browser then type the authorization code:");
+			System.out.println("  " + url);
 		}
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
