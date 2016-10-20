@@ -19,8 +19,15 @@ GoogleDriveFileSyncManagerIntegrationTest.java
 ```
 
 ##Task 3. Test with Maven
+```
+Add Maven Test Plugin
+Skip Maven Test for Integration Test
+```
 
 ##Task 4. Connect your GitHub Repo with CircleCI
+```
+Add SSH to CircleCI account and build with CircleCI
+```
 
 ##Task 5. Code Coverage
 
