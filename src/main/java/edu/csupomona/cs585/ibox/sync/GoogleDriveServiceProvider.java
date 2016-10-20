@@ -1,8 +1,11 @@
 package edu.csupomona.cs585.ibox.sync;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -51,8 +54,18 @@ public class GoogleDriveServiceProvider {
 		.setApprovalPrompt("auto").build();
 
 		String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
-		System.out.println("Please open the following URL in your browser then type the authorization code:");
-		System.out.println("  " + url);
+		//System.out.println("Please open the following URL in your browser then type the authorization code:");
+		//System.out.println("  " + url);
+		
+		System.out.println("Please input authorization: ");
+		if(Desktop.isDesktopSupported()){
+			try {
+				Desktop.getDesktop().browse(new URI(url));
+			} catch (URISyntaxException e) {
+				System.out.println("Could not open the url inside browser, please manual copy URL and open in any browser");
+			}
+		}
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String code = br.readLine();
 

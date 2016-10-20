@@ -27,6 +27,7 @@ public class GoogleDriveFileSyncManager implements FileSyncManager {
 		FileContent mediaContent = new FileContent("*/*", localFile);
 		File file = service.files().insert(body, mediaContent).execute();
 		System.out.println("File ID: " + file.getId());
+		System.out.println("File Size: "+ file.getFileSize());
 	}
 
 	@Override
@@ -40,6 +41,7 @@ public class GoogleDriveFileSyncManager implements FileSyncManager {
 			FileContent mediaContent = new FileContent("*/*", localFile);
 			File file = service.files().update(fileId, body, mediaContent).execute();
 			System.out.println("File ID: " + file.getId());
+			System.out.println("File Size: "+ file.getFileSize());
 		}
 	}
 
