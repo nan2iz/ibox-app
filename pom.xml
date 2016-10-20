@@ -14,8 +14,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <someModule.skip.tests>false</someModule.skip.tests>
     <skipTests>${module.skip.tests}</skipTests>
-    <someModule.test.includes>**/GoogleDriveFileSyncManagerTest.java</someModule.test.includes>
-    <someModule.test.excludes>**/GoogleDriveFileSyncManagerIntegrationTest.java</someModule.test.excludes>
+    <someModule.test.includes>GoogleDriveFileSyncManagerTest.java</someModule.test.includes>
+    <someModule.test.excludes>GoogleDriveFileSyncManagerIntegrationTest.java</someModule.test.excludes>
   </properties>
 
   <dependencies>
