@@ -16,6 +16,7 @@ GoogleDriveFileSyncManagerTest.java
 ##Task 2. Integration Test
 ```
 GoogleDriveFileSyncManagerIntegrationTest.java
+```
 
 ##Task 3. Test with Maven
 
