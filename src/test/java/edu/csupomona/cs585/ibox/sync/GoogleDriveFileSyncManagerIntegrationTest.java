@@ -29,8 +29,8 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 	private static java.io.File dummyFile;
 	
 	
-	//private final static String testPath = "C:/Nanwarin"; //For PC
-	private final static String testPath = "/Users/nanwarinchantarutai/Documents/TestFolder"; //for Mac
+	private final static String testPath = "C:/Nanwarin"; //For PC
+	//private final static String testPath = "/Users/nanwarinchantarutai/Documents/TestFolder"; //for Mac
 	private final static String testFile = "test.txt";
 
 	

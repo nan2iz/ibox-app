@@ -9,6 +9,7 @@ CS 585
 
 By: Nanwarin Chantarutai
 
+
 ##Task 1. Unit Test
 ```
 GoogleDriveFileSyncManagerTest.java
@@ -36,3 +37,8 @@ Add plug-in
 ```
 
 ##Task 6. Static Code Analysis Integration
+```
+Add plug-in
+-checkstyle
+-findbugs
+```
