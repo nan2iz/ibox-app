@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,9 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.Before;
 
 import com.google.api.services.drive.Drive.Files.List;
@@ -29,10 +32,12 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 	private static java.io.File dummyFile;
 	
 	
-	private final static String testPath = "C:/Nanwarin"; //For PC
-	//private final static String testPath = "/Users/nanwarinchantarutai/Documents/TestFolder"; //for Mac
+	//private final static String testPath = "C:/Nanwarin"; //For PC
+	private final static String testPath = "/Users/nanwarinchantarutai/Documents/TestFolder"; //for Mac
 	private final static String testFile = "test.txt";
 
+	@Rule
+	public final ExpectedException exception = ExpectedException.none();
 	
 	@BeforeClass 
 	public static void initial() throws IOException{
@@ -93,6 +98,19 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 	}
 	
 	@Test
+	public void testUpdateFileWhenFileIsNotExistOnGoogle() throws IOException{
+		
+		writeLog("Perform updateFile when file is not exist on google");
+		
+		createNewFile();
+		googleDrv.updateFile(localFile);
+		
+		assertTrue(isFileExistOnGoogle(localFile.getName()));
+		
+		dummyFile.delete();
+	}
+	
+	@Test
 	public void testDeleteFile() throws IOException, InterruptedException{
 		
 		writeLog("Perform deleteFile integration test");
@@ -101,6 +119,18 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 		
 		assertFalse(isFileExistOnGoogle(localFile.getName()));
 		
+	}
+	
+	@Test
+	public void testDeleteFileWhenFileIsNotExist() throws IOException{
+		
+		writeLog("Perform deleteFile when file is not exist on Google Drive");
+		
+		createNewFile();
+		exception.expect(FileNotFoundException.class);
+		googleDrv.deleteFile(dummyFile);
+		
+		dummyFile.delete();
 	}
 	
 	private static boolean isFileExistOnGoogle(String fileName) throws IOException{
