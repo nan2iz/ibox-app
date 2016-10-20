@@ -1,6 +1,7 @@
 package edu.csupomona.cs585.ibox.sync;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedWriter;
@@ -41,7 +42,7 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 
 	}
 	
-	@AfterClass
+	//@AfterClass
 	public static void lastCleanup(){
 		
 			try {
@@ -84,13 +85,22 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 
 		modifyFile();
 		googleDrv.updateFile(localFile);
-				
+		
 		assertEquals(localFile.length(), checkFileSize(localFile.getName()));
 		
 	}
 	
 	@Test
-	public void testDeleteFile(){
+	public void testDeleteFile() throws IOException, InterruptedException{
+		
+		writeLog("Perform deleteFile integration test");
+		
+		googleDrv.deleteFile(localFile);
+		
+		Thread.sleep(2000); // Put deley to make sure googledrive is updated.
+		
+		System.out.println(">>>" +isFileExistOnGoogle(localFile.getName()) ); // Need to fix
+		assertFalse(isFileExistOnGoogle(localFile.getName()));
 		
 	}
 	
@@ -112,7 +122,7 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 		FileList googleFileList = request.execute();
 		for(File file: googleFileList.getItems()){
 			if(file.getTitle().equals(fileName))
-				return file.size();
+				return file.getFileSize();
 		}
 		
 		return -1;
@@ -150,7 +160,6 @@ public class GoogleDriveFileSyncManagerIntegrationTest {
 			pWriter.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
