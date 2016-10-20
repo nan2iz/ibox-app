@@ -1,6 +1,5 @@
 package edu.csupomona.cs585.ibox.sync;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,11 +53,6 @@ public class GoogleDriveFileSyncManagerTest {
 		googleFileList = new FileList();
 		googleFileList.setItems(googleFile);
 		
-	}
-	
-	@After
-	public void cleanup(){
-
 	}
 	
 	
@@ -115,14 +109,6 @@ public class GoogleDriveFileSyncManagerTest {
 		
 		verify(delete).execute();
 	}
-	
-	@Test
-	public void testGetFileID() throws IOException{
-		
-		writeLog("Perform FileID Test");
-
-	}
-	
 	
 	public void getFileId() throws IOException{
 		
