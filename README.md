@@ -22,18 +22,21 @@ GoogleDriveFileSyncManagerIntegrationTest.java
 ##Task 3. Test with Maven
 ```
 Add Maven Test Plugin
-Skip Maven Test for Integration Test
-Report at /ibox/target/surefire-reports/edu.csupomona.cs585.ibox.sync.GoogleDriveFileSyncManagerTest.txt
+Skip Maven Test for Integration Test in pom.xml
+Run with cmd --> mvn test
+Generated reports
 ```
 
 ##Task 4. Connect your GitHub Repo with CircleCI
 ```
 Add SSH to CircleCI account and build with CircleCI
+The builde passed
 ```
 
 ##Task 5. Code Coverage
 ```
 Add plug-in
+Generated reports
 ```
 
 ##Task 6. Static Code Analysis Integration
@@ -41,4 +44,5 @@ Add plug-in
 Add plug-in
 -checkstyle
 -findbugs
+Generated reports
 ```
